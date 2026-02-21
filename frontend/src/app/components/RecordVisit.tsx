@@ -95,10 +95,10 @@ export default function RecordVisit() {
                     <Upload className="w-8 h-8 text-purple-600" />
                   </div>
                   <p className="text-gray-900 font-medium mb-1">
-                    Click to upload audio file
+                    Click to upload transcription file
                   </p>
                   <p className="text-sm text-gray-500">
-                    MP3, WAV, M4A up to 50MB
+                    JSON, TXT, or any text-based format
                   </p>
                   {fileName && (
                     <p className="text-sm text-purple-600 mt-2 font-medium">
