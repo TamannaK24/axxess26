@@ -44,7 +44,7 @@ export default function Home() {
               className="px-8 py-6 text-lg border-2 border-purple-500 text-purple-600 hover:bg-purple-50"
               onClick={() => navigate("/features")}
             >
-              View All Features
+              Analyze Your Visits
             </Button>
           </div>
         </div>
@@ -88,23 +88,6 @@ export default function Home() {
           </Card>
         </div>
 
-        {/* Stats Section */}
-        <div className="mt-16 text-center">
-          <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-            <div>
-              <div className="text-3xl font-bold text-purple-600">98%</div>
-              <div className="text-sm text-gray-600 mt-1">Accuracy</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-purple-600">5k+</div>
-              <div className="text-sm text-gray-600 mt-1">Users</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-purple-600">50k+</div>
-              <div className="text-sm text-gray-600 mt-1">Visits Analyzed</div>
-            </div>
-          </div>
-        </div>
       </main>
     </div>
   );
