@@ -6,11 +6,7 @@ import {
   Heart, 
   Home,
   MessageSquare,
-  AlertTriangle,
   Users,
-  Activity,
-  Flag,
-  CheckCircle,
   Calendar,
   Download
 } from "lucide-react";
@@ -29,15 +25,6 @@ export default function FeatureList() {
       iconColor: "text-blue-600",
     },
     {
-      number: 2,
-      title: "AI-Powered Alerts",
-      description: "Automated detection of misdiagnosis risks and gender bias patterns",
-      icon: AlertTriangle,
-      color: "from-red-500 to-orange-500",
-      bgColor: "bg-red-50",
-      iconColor: "text-red-600",
-    },
-    {
       number: 3,
       title: "Similar Patient Cases",
       description: "Anonymized patients with matching symptom profiles (privacy-protected)",
@@ -45,33 +32,6 @@ export default function FeatureList() {
       color: "from-purple-500 to-pink-500",
       bgColor: "bg-purple-50",
       iconColor: "text-purple-600",
-    },
-    {
-      number: 4,
-      title: "Key Symptoms Extraction",
-      description: "Automated identification and prioritization of reported symptoms",
-      icon: Activity,
-      color: "from-green-500 to-emerald-500",
-      bgColor: "bg-green-50",
-      iconColor: "text-green-600",
-    },
-    {
-      number: 5,
-      title: "Red Flag Detection",
-      description: "Critical alerts for symptoms that require immediate attention",
-      icon: Flag,
-      color: "from-yellow-500 to-amber-500",
-      bgColor: "bg-yellow-50",
-      iconColor: "text-yellow-600",
-    },
-    {
-      number: 6,
-      title: "Action Items Generator",
-      description: "Suggested questions to ask your clinician with priority levels",
-      icon: CheckCircle,
-      color: "from-teal-500 to-cyan-500",
-      bgColor: "bg-teal-50",
-      iconColor: "text-teal-600",
     },
     {
       number: 7,
@@ -127,7 +87,7 @@ export default function FeatureList() {
           </p>
           <div className="flex gap-3 justify-center">
             <Badge className="bg-purple-100 text-purple-700 px-4 py-2">
-              8 Features Total
+              4 Features Total
             </Badge>
             <Badge className="bg-green-100 text-green-700 px-4 py-2">
               Ready to Present

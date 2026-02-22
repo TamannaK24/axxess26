@@ -79,7 +79,7 @@ export default function Feature3() {
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
       <FeatureNav 
         currentFeature={3}
-        totalFeatures={8}
+        totalFeatures={4}
         title="Similar Patient Cases"
         description="Anonymized patients with matching symptom profiles (privacy-protected)"
       />

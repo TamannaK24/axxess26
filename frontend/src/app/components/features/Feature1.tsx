@@ -2,6 +2,7 @@ import FeatureNav from "./FeatureNav";
 import { Card } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { ScrollArea } from "../ui/scroll-area";
+import BiasAlert from "../BiasAlert";
 
 export default function Feature1() {
   const transcriptLines = [
@@ -23,11 +24,165 @@ export default function Feature1() {
     bias: ["stress", "anxiety", "anxious", "relax", "cycle discomfort", "just", "probably"],
   };
 
+  const alerts = [
+    {
+      type: "misdiagnosis" as const,
+      title: "Dismissal of Severe Symptoms",
+      description: "Patient reported severe, localized abdominal pain lasting 2 weeks with worsening trajectory. This was attributed to stress without physical examination or diagnostic tests.",
+      severity: "high" as const,
+    },
+    {
+      type: "bias" as const,
+      title: "Gender Bias: 'It's Just Anxiety'",
+      description: "Doctor dismissed patient's concerns as anxiety/stress despite presenting with physical symptoms and family history of endometriosis. Research shows women's pain is often minimized.",
+      severity: "medium" as const,
+    },
+    {
+      type: "misdiagnosis" as const,
+      title: "Ignored Family History",
+      description: "Patient mentioned family history of endometriosis, which is a significant risk factor. This was not acknowledged or investigated further.",
+      severity: "high" as const,
+    },
+    {
+      type: "bias" as const,
+      title: "Delayed Diagnostic Testing",
+      description: "No diagnostic tests (ultrasound, bloodwork, physical exam) were ordered despite escalating symptoms and clear pain localization.",
+      severity: "medium" as const,
+    },
+    {
+      type: "misdiagnosis" as const,
+      title: "Pain Attribution to Menstrual Cycle",
+      description: "Severe, worsening pain was attributed to normal menstrual discomfort without investigation of underlying conditions like PCOS, fibroids, or appendicitis.",
+      severity: "high" as const,
+    },
+    {
+      type: "bias" as const,
+      title: "Symptom Minimization Pattern",
+      description: "Multiple instances of patient symptoms being minimized with phrases like 'just anxious', 'probably stress', indicating systematic dismissal.",
+      severity: "medium" as const,
+    },
+  ];
+
+  const symptoms = [
+    {
+      symptom: "Severe abdominal pain (lower right)",
+      severity: "high",
+      category: "Primary Complaint",
+      duration: "2 weeks",
+      progression: "Worsening",
+    },
+    {
+      symptom: "Pain worsening over time",
+      severity: "high",
+      category: "Progression",
+      duration: "2 weeks",
+      progression: "Escalating",
+    },
+    {
+      symptom: "Pain disrupting sleep",
+      severity: "high",
+      category: "Severity Indicator",
+      duration: "3+ days",
+      progression: "Recent",
+    },
+    {
+      symptom: "Family history: Endometriosis",
+      severity: "high",
+      category: "Risk Factor",
+      duration: "N/A",
+      progression: "Genetic",
+    },
+    {
+      symptom: "Nausea",
+      severity: "medium",
+      category: "Associated Symptom",
+      duration: "1 week",
+      progression: "Stable",
+    },
+    {
+      symptom: "Loss of appetite",
+      severity: "medium",
+      category: "Associated Symptom",
+      duration: "3+ days",
+      progression: "Recent",
+    },
+    {
+      symptom: "Irregular periods",
+      severity: "medium",
+      category: "Reproductive Health",
+      duration: "Ongoing",
+      progression: "Chronic",
+    },
+    {
+      symptom: "Chronic fatigue",
+      severity: "medium",
+      category: "Systemic",
+      duration: "2+ weeks",
+      progression: "Persistent",
+    },
+  ];
+
+  const redFlags = [
+    {
+      flag: "Pain worsening over 2 weeks",
+      risk: "Critical",
+      action: "Demand imaging tests within 48 hours",
+    },
+    {
+      flag: "Localized pain (lower right abdomen)",
+      risk: "Critical",
+      action: "Physical examination + ultrasound required",
+    },
+    {
+      flag: "Symptoms dismissed as stress/anxiety",
+      risk: "High",
+      action: "Request second opinion from different provider",
+    },
+    {
+      flag: "Night-waking pain (severity 7-9/10)",
+      risk: "Critical",
+      action: "Document pain levels, request pain management referral",
+    },
+    {
+      flag: "Loss of appetite + nausea",
+      risk: "High",
+      action: "Request comprehensive bloodwork (CBC, CRP, ESR)",
+    },
+    {
+      flag: "No diagnostic tests ordered",
+      risk: "Critical",
+      action: "Explicitly request ultrasound, bloodwork, physical exam",
+    },
+    {
+      flag: "Family history ignored",
+      risk: "High",
+      action: "Bring family medical records, request specialist referral",
+    },
+  ];
+
+  const alertStats = {
+    highSeverity: alerts.filter((alert) => alert.severity === "high").length,
+    misdiagnosisRisk: alerts.filter((alert) => alert.type === "misdiagnosis")
+      .length,
+    biasDetected: alerts.filter((alert) => alert.type === "bias").length,
+  };
+
+  const highSeveritySymptoms = symptoms.filter(
+    (symptom) => symptom.severity === "high",
+  );
+  const mediumSeveritySymptoms = symptoms.filter(
+    (symptom) => symptom.severity === "medium",
+  );
+  const urgencyLevels = {
+    critical: redFlags.filter((flag) => flag.risk === "Critical").length,
+    high: redFlags.filter((flag) => flag.risk === "High").length,
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
       <FeatureNav 
         currentFeature={1}
-        totalFeatures={8}
+        totalFeatures={4}
         title="Smart Transcription"
         description="AI-powered transcription with real-time keyword detection for symptoms and bias markers"
       />
@@ -179,6 +334,116 @@ export default function Feature1() {
             </Card>
           </div>
         </div>
+
+        <section className="mt-12 space-y-8">
+          <div>
+            <h3 className="text-2xl font-semibold text-gray-900 mb-2">Dashboard Insights</h3>
+            <p className="text-gray-600">
+              AI alerts, key symptoms, and red flags are consolidated here for quick review.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-4">
+            <Card className="p-4 text-center">
+              <div className="text-3xl font-bold text-red-600">{alertStats.highSeverity}</div>
+              <div className="text-sm text-gray-600 mt-1">Critical Alerts</div>
+            </Card>
+            <Card className="p-4 text-center">
+              <div className="text-3xl font-bold text-red-600">{alertStats.misdiagnosisRisk}</div>
+              <div className="text-sm text-gray-600 mt-1">Misdiagnosis Risks</div>
+            </Card>
+            <Card className="p-4 text-center">
+              <div className="text-3xl font-bold text-yellow-600">{alertStats.biasDetected}</div>
+              <div className="text-sm text-gray-600 mt-1">Bias Indicators</div>
+            </Card>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-6">
+            <Card className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="text-xl font-semibold text-gray-900">AI-Powered Alerts</h4>
+                <Badge className="bg-red-100 text-red-800">
+                  {alertStats.highSeverity} Critical
+                </Badge>
+              </div>
+              <div className="space-y-4">
+                {alerts.map((alert, idx) => (
+                  <BiasAlert key={idx} {...alert} />
+                ))}
+              </div>
+            </Card>
+
+            <div className="space-y-6">
+              <Card className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-xl font-semibold text-gray-900">Key Symptoms</h4>
+                  <Badge className="bg-purple-100 text-purple-700">
+                    {symptoms.length} Total
+                  </Badge>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-semibold text-red-900">High Severity</span>
+                      <Badge className="bg-red-600 text-white">{highSeveritySymptoms.length}</Badge>
+                    </div>
+                    <div className="space-y-2">
+                      {highSeveritySymptoms.map((item, idx) => (
+                        <div key={idx} className="flex items-start justify-between gap-3 rounded-md border border-red-200 bg-red-50 px-3 py-2">
+                          <div>
+                            <div className="text-sm font-semibold text-gray-900">{item.symptom}</div>
+                            <div className="text-xs text-gray-600">{item.category} • {item.duration}</div>
+                          </div>
+                          <Badge className="bg-red-600 text-white">High</Badge>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-semibold text-yellow-900">Medium Severity</span>
+                      <Badge className="bg-yellow-600 text-white">{mediumSeveritySymptoms.length}</Badge>
+                    </div>
+                    <div className="space-y-2">
+                      {mediumSeveritySymptoms.map((item, idx) => (
+                        <div key={idx} className="flex items-start justify-between gap-3 rounded-md border border-yellow-200 bg-yellow-50 px-3 py-2">
+                          <div>
+                            <div className="text-sm font-semibold text-gray-900">{item.symptom}</div>
+                            <div className="text-xs text-gray-600">{item.category} • {item.duration}</div>
+                          </div>
+                          <Badge className="bg-yellow-600 text-white">Medium</Badge>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-xl font-semibold text-gray-900">Red Flag Detection</h4>
+                  <Badge className="bg-red-600 text-white">{urgencyLevels.critical} Critical</Badge>
+                </div>
+                <div className="space-y-3">
+                  {redFlags.map((flag, idx) => (
+                    <div key={idx} className="rounded-md border border-gray-200 p-3">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <div className="text-sm font-semibold text-gray-900">{flag.flag}</div>
+                          <div className="text-xs text-gray-600 mt-1">{flag.action}</div>
+                        </div>
+                        <Badge className={flag.risk === "Critical" ? "bg-red-600 text-white" : "bg-orange-600 text-white"}>
+                          {flag.risk}
+                        </Badge>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );

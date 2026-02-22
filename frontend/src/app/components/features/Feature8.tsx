@@ -45,7 +45,7 @@ export default function Feature8() {
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
       <FeatureNav 
         currentFeature={8}
-        totalFeatures={8}
+        totalFeatures={4}
         title="Complete Summary & Export"
         description="Comprehensive patient report with all insights, exportable as PDF"
       />

@@ -68,7 +68,7 @@ export default function Feature7() {
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
       <FeatureNav 
         currentFeature={7}
-        totalFeatures={8}
+        totalFeatures={4}
         title="Symptom Timeline"
         description="Visual progression of symptoms over time to identify escalation patterns"
       />

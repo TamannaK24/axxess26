@@ -4,11 +4,7 @@ import RecordVisit from "./components/RecordVisit";
 import Analysis from "./components/Analysis";
 import FeatureList from "./components/features/FeatureList";
 import Feature1 from "./components/features/Feature1";
-import Feature2 from "./components/features/Feature2";
 import Feature3 from "./components/features/Feature3";
-import Feature4 from "./components/features/Feature4";
-import Feature5 from "./components/features/Feature5";
-import Feature6 from "./components/features/Feature6";
 import Feature7 from "./components/features/Feature7";
 import Feature8 from "./components/features/Feature8";
 
@@ -34,24 +30,8 @@ export const router = createBrowserRouter([
     Component: Feature1,
   },
   {
-    path: "/feature2",
-    Component: Feature2,
-  },
-  {
     path: "/feature3",
     Component: Feature3,
-  },
-  {
-    path: "/feature4",
-    Component: Feature4,
-  },
-  {
-    path: "/feature5",
-    Component: Feature5,
-  },
-  {
-    path: "/feature6",
-    Component: Feature6,
   },
   {
     path: "/feature7",
